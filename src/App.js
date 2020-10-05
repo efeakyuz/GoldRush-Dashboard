@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 import Navi from "./components/Navi";
 import Dashboard from "./components/Dashboard";
 import Detail from "./components/Detail";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
 
