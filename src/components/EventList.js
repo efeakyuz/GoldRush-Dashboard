@@ -10,12 +10,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Row } from "reactstrap";
 import DeleteIcon from '@material-ui/icons/Delete';
+import {API_URL, HEADERS} from "../constants/Api";
 
 const useStyles = makeStyles({
   root: {
     marginTop: '2rem',
     marginRight:'1',
-    marginLeft:'2rem',
+    marginLeft:'4rem',
     width: 310,
     height: 300
   },
@@ -27,18 +28,13 @@ const useStyles = makeStyles({
 
 function EvenList() {
   const [events, setEvents] = useState([]);
-  const url = "https://goldrush.dokuziki.com";
   const classes = useStyles();
 
   const getEvents = useCallback(() => {
     axios({
       method: "GET",
-      url: `${url}/event/public`,
-      headers: {
-        "device-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDA4MDEyMTV9.uOzCUjB1YWEKzP1ji_WyKCaFHpNGb5_A9QhoeYn7t-0",
-        "auth-token": "757d6bbe-15b5-4821-8ddf-f9bb313e4fce",
-      },
+      url: `${API_URL}/admin/event`,
+      headers: HEADERS
     }).then((response) => {
       setEvents(response.data.events);
     });
@@ -47,12 +43,8 @@ function EvenList() {
   const deleteEventApi = (id) => {
     axios({
       method: "DELETE",
-      url: `${url}/event/${id}`,
-      headers: {
-        "device-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDA4MDEyMTV9.uOzCUjB1YWEKzP1ji_WyKCaFHpNGb5_A9QhoeYn7t-0",
-        "auth-token": "757d6bbe-15b5-4821-8ddf-f9bb313e4fce",
-      },
+      url: `${API_URL}/event/${id}`,
+      headers: HEADERS
     });
   };
 

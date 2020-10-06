@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { Input, InputGroup, InputGroupAddon, InputGroupText, Button } from 'reactstrap';
+import {API_URL, HEADERS} from "../constants/Api";
 
 const Detail = (props) => {
 
@@ -12,11 +13,8 @@ const Detail = (props) => {
   const getEvent = useCallback(() => {
     axios({
       method: "get",
-      url: `https://goldrush.dokuziki.com/event/${id}`,
-      headers: {
-        "device-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDA4MDEyMTV9.uOzCUjB1YWEKzP1ji_WyKCaFHpNGb5_A9QhoeYn7t-0",
-        "auth-token": "757d6bbe-15b5-4821-8ddf-f9bb313e4fce"
-      },
+      url: `${API_URL}/event/${id}`,
+      headers: HEADERS
     })
       .then((response) => {
         setEventDetail(response.data.event);
@@ -32,25 +30,25 @@ const Detail = (props) => {
       <br />
       <h1 style={{textAlign: 'center'}}>{eventDetail.title}</h1>
       <br />
-      <InputGroup>
+      <InputGroup size="lg">
         <InputGroupAddon addonType="prepend">
-          <InputGroupText>id</InputGroupText>
+          <InputGroupText>ID</InputGroupText>
         </InputGroupAddon>
         <Input placeholder="id" value={eventDetail.id} />
       </InputGroup>
       <br />
-      <InputGroup>
+      <InputGroup size="sm">
         <InputGroupAddon addonType="prepend">
-          <InputGroupText>share code</InputGroupText>
+          <InputGroupText>Share Code</InputGroupText>
         </InputGroupAddon>
         <Input placeholder="share code" value={eventDetail.share_code} />
       </InputGroup>
       <br />
-      <InputGroup>
+      <InputGroup size="lg">
         <InputGroupAddon addonType="prepend">
-          <InputGroupText>title</InputGroupText>
+          <InputGroupText>Title</InputGroupText>
         </InputGroupAddon>
-        <Input placeholder="title" value={eventDetail.title} />
+        <Input placeholder="title" value={eventDetail.title}/>
       </InputGroup>
       <br />
 
